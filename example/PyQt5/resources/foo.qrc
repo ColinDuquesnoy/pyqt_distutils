@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>document-save.png</file>
+    <file>document-open.png</file>
+    <file>document-new.png</file>
+    <file>document.txt</file>
+  </qresource>
+</RCC>
