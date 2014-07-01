@@ -72,6 +72,11 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.1.2
++++++
+
+- Improve readme
+
 0.1.1
 +++++
 
