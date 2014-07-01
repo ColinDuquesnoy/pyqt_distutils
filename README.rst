@@ -3,7 +3,6 @@ PyQt Distutils
 
 A set of distutils extension to work with PyQt applications and UI files.
 
-
 The goal of this tiny library is to help you write PyQt application in a
 pythonic way, using setup.py to build the Qt designer Ui files.
 
@@ -13,7 +12,9 @@ This works with PyQt4, PyQt5 and PySide (tested with python3 only).
 Usage
 -----
 
-Add the following lines to your setup.py::
+Add the following lines to your setup.py:
+
+.. code-block:: python
 
     # import build_ui
     try:
@@ -32,17 +33,14 @@ To build the ui/qrc files, run::
 
     python setup.py build_ui
 
-The build_ui will build the outdated ui/qrc files. You can force a full rebuild
-using the -f switch::
-
-    python setup.py build_ui -f    cmdclass={'build_ui': build_ui},
-
 
 UI Files
 --------
 
 The compilation of ui files is driven by a pyuic.cfg file, which is a plain
-json file with the following format::
+json file with the following format:
+
+.. code-block:: python
 
     {
         "files": [
@@ -73,6 +71,11 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+
+0.1.2
++++++
+
+- Improve readme
 
 0.1.1
 +++++
