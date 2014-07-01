@@ -10,5 +10,6 @@ setup(
     license='MIT',
     author='Colin Duquesnoy',
     author_email='colin.duquesnoy@gmail.com',
-    description='A set of distutils extension for building Qt ui files'
+    description='A set of distutils extension for building Qt ui files',
+    entry_points={'console_scripts': ['pyuicfg = pyqt_distutils.pyuicfg:main']}
 )
