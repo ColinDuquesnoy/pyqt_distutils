@@ -18,11 +18,15 @@ Add the following lines to your setup.py::
     # import build_ui
     try:
         from pyqt_distutils import build_ui
+        cmdclass = {'build_ui': build_ui}
     except ImportError:
         build_ui = None  # user won't have pyqt_distutils when deploying
+        cmdclass = {}
+
+    ...
 
     setup(...,
-          cmdclass={'build_ui': build_ui})
+          cmdclass=cmdclass)
 
 To build the ui/qrc files, run::
 
@@ -66,3 +70,16 @@ License
 -------
 
 This project is licensed under the MIT license.
+
+Changelog
+---------
+
+0.1.1
++++++
+
+- Fix description and examples when pyqt-distutils has not been installed.
+
+0.1.0
++++++
+
+- Initial release
