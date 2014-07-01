@@ -5,6 +5,8 @@ Distutils extension for PyQt/PySide applications
 import os
 from setuptools import Command
 
+from .config import Config
+
 
 class build_ui(Command):
     """
@@ -16,19 +18,9 @@ class build_ui(Command):
         pass
 
     def finalize_options(self):
-        import json
-
-        class Config:
-            def uic_command(self):
-                return self.pyuic + ' ' + self.pyuic_options + ' %s -o %s'
-
-            def rcc_command(self):
-                return self.pyrcc + ' ' + self.pyrcc_options + ' %s -o %s'
-
         try:
-            with open('pyuic.cfg') as f:
-                self.cfg = Config()
-                self.cfg.__dict__ = json.load(f)
+            self.cfg = Config()
+            self.cfg.load()
         except (IOError, OSError):
             print('cannot open pyuic.cfg')
             self.cfg = None

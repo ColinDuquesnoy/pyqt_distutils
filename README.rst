@@ -64,6 +64,28 @@ Here is a brief description of the fields:
 - pyuic: the name of the pyuic tool to use (e.g: 'pyrcc4' or 'pyside-rcc')
 
 
+Command line tool
+-----------------
+
+Starting from version 0.2, you can use the ``pyuicfg`` command line tool
+to manage your ``pyuic.cfg`` file::
+
+    # generate pyuic.cfg in the current directory, for use with PyQt4
+    pyuicfg -g
+
+    # generate pyuic.cfg in the current directory, for use with PyQt5
+    pyuicfg -g --pyqt5
+
+    # generate pyuic.cfg in the current directory, for use with PySide
+    pyuicfg -g --pyside
+
+    # add files
+    pyuicfg -a forms/main_window.ui foo_package/forms
+    pyuicfg -a resources/foo.qrc foo_package/forms
+
+    # remove file
+    pyuicfg -r resources/foo.qrc
+
 License
 -------
 
@@ -71,6 +93,11 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+
+0.2.0
++++++
+
+- add ``pyuicfg`` command line tool to administrate your ``pyuic.cfg`` file.
 
 0.1.2
 +++++
