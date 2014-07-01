@@ -30,7 +30,7 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
-.cache
+.cachetivité récente en vous connectant maintenant
 nosetests.xml
 coverage.xml
 
@@ -42,6 +42,9 @@ coverage.xml
 .project
 .pydevproject
 
+# Pycharm
+.idea
+
 # Rope
 .ropeproject
 
@@ -52,3 +55,7 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+
+# Ui scripts
+main_window_ui.py
+*_rc.py
