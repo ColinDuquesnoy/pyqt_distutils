@@ -38,24 +38,24 @@ UI Files
 --------
 
 The compilation of ui files is driven by a pyuic.cfg file, which is a plain
-json file with the following format:
+json file with the following format::
 
-{
-    "files": [
-        [
-            "forms/main_window.ui",
-            "package/forms"
-        ]
-    ],
-    "pyrcc": "pyrcc5",
-    "pyrcc_options": "",
-    "pyuic": "pyuic5",
-    "pyuic_options": "--from-imports"
-}
+    {
+        "files": [
+            [
+                "forms/main_window.ui",
+                "package/forms"
+            ]
+        ],
+        "pyrcc": "pyrcc5",
+        "pyrcc_options": "",
+        "pyuic": "pyuic5",
+        "pyuic_options": "--from-imports"
+    }
 
 Here is a brief description of the fields:
 
-- files is a list of file pairs made up of the source ui file and the
+- files: list of file pairs made up of the source ui file and the
   destination package
 - pyrcc: the name of the pyrcc tool to use (e.g: 'pyrcc4' or 'pyside-rcc')
 - pyrcc_options: pyrcc options (optional)
