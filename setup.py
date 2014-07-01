@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyqt-distutils',
-    version='0.1',
+    version='0.1.1',
     packages=find_packages(),
     url='https://github.com/ColinDuquesnoy/pyqt_distutils',
     license='MIT',
