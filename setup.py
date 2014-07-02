@@ -23,6 +23,7 @@ setup(
     author='Colin Duquesnoy',
     author_email='colin.duquesnoy@gmail.com',
     description='A set of distutils extension for building Qt ui files',
+    install_requires=['enum34', 'docopt'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Setuptools Plugin',

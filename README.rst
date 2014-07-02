@@ -86,6 +86,24 @@ to manage your ``pyuic.cfg`` file::
     # remove file
     pyuicfg -r resources/foo.qrc
 
+Requirements
+------------
+The following packages are required:
+
+    - enum34 (python enums)
+    - docopt
+
+Install
+-------
+
+You can either install from pypi::
+
+    (sudo) pip install pyqt-distutils
+
+Or from source::
+
+    pip install .
+
 License
 -------
 
@@ -93,6 +111,10 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.2.1
++++++
+
+- fix missing install requirements (docopt and enum34).
 
 0.2.0
 +++++
