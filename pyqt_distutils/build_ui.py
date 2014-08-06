@@ -2,6 +2,7 @@
 """
 Distutils extension for PyQt/PySide applications
 """
+import glob
 import os
 from setuptools import Command
 
@@ -52,33 +53,34 @@ class build_ui(Command):
     def run(self):
         if not self.cfg:
             return
-        for src, dst in self.cfg.files:
-            if not os.path.exists(src):
-                print('skipping target %s, file not found' % src)
-                continue
-            src = os.path.join(os.getcwd(), src)
-            dst = os.path.join(os.getcwd(), dst)
-            ui = True
-            if src.endswith('.ui'):
-                ext = '_ui.py'
-                cmd = self.cfg.uic_command()
-            elif src.endswith('.qrc'):
-                ui = False
-                ext = '_rc.py'
-                cmd = self.cfg.rcc_command()
-            else:
-                continue
-            filename = os.path.split(src)[1]
-            filename = os.path.splitext(filename)[0]
-            dst = os.path.join(dst, filename + ext)
-            cmd = cmd % (src, dst)
-            try:
-                os.makedirs(os.path.split(dst)[0])
-            except FileExistsError:
-                pass
+        for glob_exp, dest in self.cfg.files:
+            for src in glob.glob(glob_exp):
+                if not os.path.exists(src):
+                    print('skipping target %s, file not found' % src)
+                    continue
+                src = os.path.join(os.getcwd(), src)
+                dst = os.path.join(os.getcwd(), dest)
+                ui = True
+                if src.endswith('.ui'):
+                    ext = '_ui.py'
+                    cmd = self.cfg.uic_command()
+                elif src.endswith('.qrc'):
+                    ui = False
+                    ext = '_rc.py'
+                    cmd = self.cfg.rcc_command()
+                else:
+                    continue
+                filename = os.path.split(src)[1]
+                filename = os.path.splitext(filename)[0]
+                dst = os.path.join(dst, filename + ext)
+                cmd = cmd % (src, dst)
+                try:
+                    os.makedirs(os.path.split(dst)[0])
+                except FileExistsError:
+                    pass
 
-            if self.is_outdated(src, dst, ui):
-                print(cmd)
-                os.system(cmd)
-            else:
-                print('skipping %s, up to date' % src)
+                if self.is_outdated(src, dst, ui):
+                    print(cmd)
+                    os.system(cmd)
+                else:
+                    print('skipping %s, up to date' % src)
