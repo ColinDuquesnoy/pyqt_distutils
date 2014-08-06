@@ -64,6 +64,24 @@ Here is a brief description of the fields:
 - pyuic: the name of the pyuic tool to use (e.g: 'pyrcc4' or 'pyside-rcc')
 
 
+Starting from version 3.0, you can use a *glob expression* instead of a file path.
+E.g., to compile all ui files under the ``forms`` directory in ``package/forms``, you could
+write the following pyuic.cfg::
+
+    {
+        "files": [
+            [
+                "forms/*.ui",
+                "package/forms"
+            ]
+        ],
+        "pyrcc": "pyrcc5",
+        "pyrcc_options": "",
+        "pyuic": "pyuic5",
+        "pyuic_options": "--from-imports"
+    }
+
+
 Command line tool
 -----------------
 
@@ -111,6 +129,10 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.3.0
++++++
+- allow glob expression in files lists.
+
 0.2.1
 +++++
 
