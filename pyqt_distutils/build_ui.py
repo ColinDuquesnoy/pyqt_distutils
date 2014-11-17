@@ -56,7 +56,6 @@ class build_ui(Command):
         return outdated
 
     def run(self):
-        print(self.force)
         if not self.cfg:
             return
         for glob_exp, dest in self.cfg.files:

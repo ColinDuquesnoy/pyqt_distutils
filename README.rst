@@ -128,8 +128,13 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.4.1
++++++
+
+- remove useless and confusing print statement
+
 0.4.0
------
++++++
 
 - add a ``--force`` flag
 - always force compilation ``*.qrc`` files
