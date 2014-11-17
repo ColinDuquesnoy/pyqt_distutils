@@ -33,6 +33,9 @@ To build the ui/qrc files, run::
 
     python setup.py build_ui
 
+To forcibly rebuilt every files, use the ``--force`` option::
+
+    python setup.py build_ui --force
 
 UI Files
 --------
@@ -129,6 +132,12 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.4.0
+-----
+
+- add a ``--force`` flag
+- always force compilation *.qrc files
+
 0.3.0
 +++++
 - allow glob expression in files lists.
