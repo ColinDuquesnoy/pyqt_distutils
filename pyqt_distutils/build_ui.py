@@ -27,6 +27,8 @@ class build_ui(Command):
             self.cfg = None
 
     def is_outdated(self, src, dst, ui):
+        if src.endswith('.qrc'):
+            return True
         outdated = (not os.path.exists(dst) or
                     (os.path.getmtime(src) > os.path.getmtime(dst)))
         if not outdated and not ui:
