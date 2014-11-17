@@ -13,10 +13,13 @@ class build_ui(Command):
     """
     Builds the Qt ui files as described in pyuic.cfg.
     """
-    user_options = []
+    user_options = [
+        ('force', None,
+         'Force flag, will force recompilation of every ui/qrc file'),
+    ]
 
     def initialize_options(self):
-        pass
+        self.force = False
 
     def finalize_options(self):
         try:
@@ -27,7 +30,7 @@ class build_ui(Command):
             self.cfg = None
 
     def is_outdated(self, src, dst, ui):
-        if src.endswith('.qrc'):
+        if src.endswith('.qrc') or self.force:
             return True
         outdated = (not os.path.exists(dst) or
                     (os.path.getmtime(src) > os.path.getmtime(dst)))
@@ -53,6 +56,7 @@ class build_ui(Command):
         return outdated
 
     def run(self):
+        print(self.force)
         if not self.cfg:
             return
         for glob_exp, dest in self.cfg.files:
