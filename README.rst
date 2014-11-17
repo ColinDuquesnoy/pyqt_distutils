@@ -12,9 +12,7 @@ This works with PyQt4, PyQt5 and PySide (tested with python3 only).
 Usage
 -----
 
-Add the following lines to your setup.py:
-
-.. code-block:: python
+Add the following lines to your setup.py::
 
     # import build_ui
     try:
@@ -41,9 +39,7 @@ UI Files
 --------
 
 The compilation of ui files is driven by a pyuic.cfg file, which is a plain
-json file with the following format:
-
-.. code-block:: python
+json file with the following format::
 
     {
         "files": [
@@ -136,7 +132,7 @@ Changelog
 -----
 
 - add a ``--force`` flag
-- always force compilation *.qrc files
+- always force compilation ``*.qrc`` files
 
 0.3.0
 +++++
