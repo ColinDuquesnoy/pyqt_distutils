@@ -128,7 +128,8 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
-0.4.3
+
+0.5.0
 +++++
 
 - allow the use of .json extension instead of .cfg (both are supported, .json
