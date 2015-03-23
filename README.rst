@@ -12,7 +12,9 @@ This works with PyQt4, PyQt5 and PySide (tested with python3 only).
 Usage
 -----
 
-Add the following lines to your setup.py::
+Add the following lines to your setup.py:
+
+.. code-block:: python
 
     # import build_ui
     try:
@@ -39,7 +41,9 @@ UI Files
 --------
 
 The compilation of ui files is driven by a pyuic.json file, which is a plain
-json file with the following format::
+json file with the following format:
+
+.. code-block:: json
 
     {
         "files": [
@@ -65,7 +69,9 @@ Here is a brief description of the fields:
 
 Starting from version 3.0, you can use a *glob expression* instead of a file path.
 E.g., to compile all ui files under the ``forms`` directory in ``package/forms``, you could
-write the following pyuic.json::
+write the following pyuic.json:
+
+.. code-block:: json
 
     {
         "files": [
@@ -85,7 +91,9 @@ Command line tool
 -----------------
 
 Starting from version 0.2, you can use the ``pyuicfg`` command line tool
-to manage your ``pyuic.json`` file::
+to manage your ``pyuic.json`` file:
+
+.. code-block:: bash
 
     # generate pyuic.json in the current directory, for use with PyQt4
     pyuicfg -g
@@ -107,8 +115,8 @@ Requirements
 ------------
 The following packages are required:
 
-    - enum34 (python enums)
-    - docopt
+- enum34 (python enums)
+- docopt
 
 Install
 -------
