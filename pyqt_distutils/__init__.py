@@ -5,4 +5,4 @@ A set of PyQt distutils extensions for build qt ui files in a pythonic way:
 
 """
 
-__version__ = '0.4.1'
+__version__ = '0.4.2'

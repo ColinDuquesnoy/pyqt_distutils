@@ -128,6 +128,11 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.4.2
+++++++
+
+- fix python 2 compatibility (#2)
+
 0.4.1
 +++++
 
