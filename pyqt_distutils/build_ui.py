@@ -81,7 +81,7 @@ class build_ui(Command):
                 cmd = cmd % (src, dst)
                 try:
                     os.makedirs(os.path.split(dst)[0])
-                except FileExistsError:
+                except OSError:
                     pass
 
                 if self.is_outdated(src, dst, ui):
