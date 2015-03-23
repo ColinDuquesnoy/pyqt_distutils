@@ -1,5 +1,5 @@
 """
-Contains the config class (pyuic.cfg)
+Contains the config class (pyuic.cfg or pyuic.json)
 
 """
 import json
@@ -27,14 +27,19 @@ class Config:
         return self.pyrcc + ' ' + self.pyrcc_options + ' %s -o %s'
 
     def load(self):
-        try:
-            with open('pyuic.cfg', 'r') as f:
-                self.__dict__ = json.load(f)
-        except (IOError, OSError):
-            print('failed to load pyuic.cfg')
+        for ext in ['.cfg', '.json']:
+            try:
+                with open('pyuic' + ext, 'r') as f:
+                    self.__dict__ = json.load(f)
+            except (IOError, OSError):
+                pass
+            else:
+                break
+        else:
+            print('failed to open configuration file')
 
     def save(self):
-        with open('pyuic.cfg', 'w') as f:
+        with open('pyuic.json', 'w') as f:
             json.dump(self.__dict__, f, indent=4, sort_keys=True)
 
     def generate(self, api):
@@ -57,7 +62,7 @@ class Config:
             self.pyuic_options = '--from-import'
             self.files[:] = []
         self.save()
-        print('pyuic.cfg generated')
+        print('pyuic.json generated')
 
     def add(self, src, dst):
         self.load()
@@ -67,7 +72,7 @@ class Config:
                 return
         self.files.append((src, dst))
         self.save()
-        print('file added to pyuic.cfg: %s -> %s' % (src, dst))
+        print('file added to pyuic.json: %s -> %s' % (src, dst))
 
     def remove(self, filename):
         self.load()
@@ -80,4 +85,4 @@ class Config:
         if to_remove is not None:
             self.files.pop(to_remove)
         self.save()
-        print('file removed from pyuic.cfg: %s' % filename)
+        print('file removed from pyuic.json: %s' % filename)

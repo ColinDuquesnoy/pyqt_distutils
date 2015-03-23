@@ -1,4 +1,4 @@
-"""Help you manage your pyuic.cfg file (pyqt-distutils)
+"""Help you manage your pyuic.json file (pyqt-distutils)
 
 Usage:
     pyuicfg -g
@@ -12,11 +12,11 @@ Usage:
 Options:
     -h, --help                            Show help
     --version                             Show version
-    -g                                    Generate pyuic.cfg
-    -a SOURCE_FILE DESTINATION_PACKAGE    Add file to pyuic.cfg
-    -r SOURCE_FILE                        Remove file from pyuic.cfg
-    --pyqt5                               Generate a pyuic.cfg file for PyQt5 instead of PyQt4
-    --pyside                              Generate a pyuic.cfg file for PySide instead of PyQt4
+    -g                                    Generate pyuic.json
+    -a SOURCE_FILE DESTINATION_PACKAGE    Add file to pyuic.json
+    -r SOURCE_FILE                        Remove file from pyuic.json
+    --pyqt5                               Generate a pyuic.json file for PyQt5 instead of PyQt4
+    --pyside                              Generate a pyuic.json file for PySide instead of PyQt4
 
 """
 import os
@@ -42,8 +42,8 @@ def main():
     api = qt_api_from_args(arguments)
     cfg = Config()
     if generate:
-        if os.path.exists('pyuic.cfg'):
-            choice = input('pyuic.cfg already exists. Do you want to replace '
+        if os.path.exists('pyuic.json'):
+            choice = input('pyuic.json already exists. Do you want to replace '
                            'it? (y/N) ').lower()
             if choice != 'y':
                 return

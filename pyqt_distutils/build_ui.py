@@ -11,7 +11,7 @@ from .config import Config
 
 class build_ui(Command):
     """
-    Builds the Qt ui files as described in pyuic.cfg.
+    Builds the Qt ui files as described in pyuic.json (or pyuic.cfg).
     """
     user_options = [
         ('force', None,
@@ -26,7 +26,7 @@ class build_ui(Command):
             self.cfg = Config()
             self.cfg.load()
         except (IOError, OSError):
-            print('cannot open pyuic.cfg')
+            print('cannot open pyuic.json (or pyuic.cfg)')
             self.cfg = None
 
     def is_outdated(self, src, dst, ui):

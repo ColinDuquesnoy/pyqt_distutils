@@ -38,7 +38,7 @@ To forcibly rebuilt every files, use the ``--force`` option::
 UI Files
 --------
 
-The compilation of ui files is driven by a pyuic.cfg file, which is a plain
+The compilation of ui files is driven by a pyuic.json file, which is a plain
 json file with the following format::
 
     {
@@ -65,7 +65,7 @@ Here is a brief description of the fields:
 
 Starting from version 3.0, you can use a *glob expression* instead of a file path.
 E.g., to compile all ui files under the ``forms`` directory in ``package/forms``, you could
-write the following pyuic.cfg::
+write the following pyuic.json::
 
     {
         "files": [
@@ -85,15 +85,15 @@ Command line tool
 -----------------
 
 Starting from version 0.2, you can use the ``pyuicfg`` command line tool
-to manage your ``pyuic.cfg`` file::
+to manage your ``pyuic.json`` file::
 
-    # generate pyuic.cfg in the current directory, for use with PyQt4
+    # generate pyuic.json in the current directory, for use with PyQt4
     pyuicfg -g
 
-    # generate pyuic.cfg in the current directory, for use with PyQt5
+    # generate pyuic.json in the current directory, for use with PyQt5
     pyuicfg -g --pyqt5
 
-    # generate pyuic.cfg in the current directory, for use with PySide
+    # generate pyuic.json in the current directory, for use with PySide
     pyuicfg -g --pyside
 
     # add files
@@ -128,6 +128,12 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+0.4.3
++++++
+
+- allow the use of .json extension instead of .cfg (both are supported, .json
+  become the default extension)
+
 0.4.2
 ++++++
 
