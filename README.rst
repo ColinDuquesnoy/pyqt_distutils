@@ -1,6 +1,14 @@
 PyQt Distutils
 ==============
 
+.. image:: https://img.shields.io/pypi/v/pyqt-distutils.svg
+   :target: https://pypi.python.org/pypi/pyqt-distutils/
+   :alt: Latest PyPI version
+
+.. image:: https://img.shields.io/pypi/dm/pyqt-distutils.svg
+   :target: https://pypi.python.org/pypi/pyqt-distutils/
+   :alt: Number of PyPI downloads
+
 A set of distutils extension to work with PyQt applications and UI files.
 
 The goal of this tiny library is to help you write PyQt application in a
