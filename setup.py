@@ -1,6 +1,14 @@
 #!/usr/bin/env python
+import sys
+
 from setuptools import setup, find_packages
+
 from pyqt_distutils import __version__
+
+
+requirements = ['docopt']
+if int('%d%d' % (sys.version_info[:2])) < 34:
+    requirements.append('enum34')
 
 
 setup(
@@ -12,7 +20,7 @@ setup(
     author='Colin Duquesnoy',
     author_email='colin.duquesnoy@gmail.com',
     description='A set of distutils extension for building Qt ui files',
-    install_requires=['enum34', 'docopt'],
+    install_requires=requirements,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Setuptools Plugin',

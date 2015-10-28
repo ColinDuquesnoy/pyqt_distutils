@@ -145,6 +145,11 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.5.1
++++++
+
+- fix installation issue on python 3.5
+
 0.5.0
 +++++
 
