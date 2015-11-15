@@ -121,9 +121,9 @@ to manage your ``pyuic.json`` file:
 
 Requirements
 ------------
+
 The following packages are required:
 
-- enum34 (python enums)
 - docopt
 
 Install
@@ -144,6 +144,11 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+
+0.5.2
++++++
+
+- remove enum34 dependency and make the wheel truly universal
 
 0.5.1
 +++++

@@ -3,10 +3,9 @@ Contains the config class (pyuic.cfg or pyuic.json)
 
 """
 import json
-from enum import Enum
 
 
-class QtApi(Enum):
+class QtApi:
     pyqt4 = 0
     pyqt5 = 1
     pyside = 2
