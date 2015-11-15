@@ -31,5 +31,8 @@ setup(
         'Topic :: System :: Software Distribution',
         'Topic :: Text Editors :: Integrated Development Environments (IDE)'
     ],
-    entry_points={'console_scripts': ['pyuicfg = pyqt_distutils.pyuicfg:main']}
+    entry_points={
+        'console_scripts': ['pyuicfg = pyqt_distutils.pyuicfg:main'],
+        'pyqt_distutils_hooks': ['gettext = pyqt_distutils.hooks:gettext']
+    }
 )

@@ -7,7 +7,7 @@ import os
 from setuptools import Command
 
 from .config import Config
-
+from .hooks import load_hooks
 
 class build_ui(Command):
     """
@@ -20,6 +20,7 @@ class build_ui(Command):
 
     def initialize_options(self):
         self.force = False
+        self._hooks = load_hooks()
 
     def finalize_options(self):
         try:
@@ -87,5 +88,13 @@ class build_ui(Command):
                 if self.is_outdated(src, dst, ui):
                     print(cmd)
                     os.system(cmd)
+                    for hookname in self.cfg.hooks:
+                        try:
+                            hook = self._hooks[hookname]
+                        except KeyError:
+                            print('warning, unknonw hook: %r' % hookname)
+                        else:
+                            print('running hook %r' % hookname)
+                            hook(dst)
                 else:
                     print('skipping %s, up to date' % src)

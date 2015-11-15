@@ -18,6 +18,7 @@ class Config:
         self.pyuic_options = ''
         self.pyrcc = ''
         self.pyrcc_options = ''
+        self.hooks = []
 
     def uic_command(self):
         return self.pyuic + ' ' + self.pyuic_options + ' %s -o %s'
@@ -36,6 +37,8 @@ class Config:
                 break
         else:
             print('failed to open configuration file')
+        if not hasattr(self, 'hooks'):
+            self.hooks = []
 
     def save(self):
         with open('pyuic.json', 'w') as f:
