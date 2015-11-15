@@ -193,6 +193,12 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.6.2
++++++
+
+- gettext hook: don't replace ``_`` function. Now the hook works well for
+  translating ``*.ui`` files with gettext or babel.
+
 0.6.1
 +++++
 

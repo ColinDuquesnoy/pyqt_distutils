@@ -37,10 +37,6 @@ def hook(ui_file_path):
     pass
 
 
-GETTEXT_REPLACEMENT = '''        import gettext
-        _ = gettext.gettext
-'''
-
 
 def gettext(ui_file_path):
     """
@@ -49,9 +45,10 @@ def gettext(ui_file_path):
     with open(ui_file_path, 'r') as fin:
         content = fin.read()
 
+    # replace ``_translate("context", `` by ``_(``
     content = re.sub(r'_translate\(".*",\s', '_(', content)
+    content = content.replace(
+        '        _translate = QtCore.QCoreApplication.translate', '')
 
     with open(ui_file_path, 'w') as fout:
-        fout.write(content.replace(
-            '        _translate = QtCore.QCoreApplication.translate',
-            GETTEXT_REPLACEMENT))
+        fout.write(content)
