@@ -98,15 +98,19 @@ Hooks
 -----
 
 A pyqt-distutils hook is a python function that is called after the
-compilation of a ui script to let you customise its content. E.g. you
-might want to write a hook to change the translate function used or replace
-the PyQt imports by your owns if you're using a shim,...
+compilation of a ui/rc script to let you customise its content.
+
+E.g. you might want to write a hook to change the translate function used or
+replace the PyQt imports by your owns if you're using a shim,...
 
 The hook function is a simple python function which must take a single
 argument: the path to the generated python script.
 
-Hooks are exposed as setuptools entrypoint using :attr:`ENTRYPOINT` as the
-entrypoint key. E.g., in your setup.py::
+Hooks are exposed as setuptools entrypoint using ``pyqt_distutils_hooks`` as
+the entrypoint key. Add the following code to your setup.py to register your
+onw hooks:
+
+.. code-block:: python
 
     setup(
         ...,
@@ -118,8 +122,11 @@ entrypoint key. E.g., in your setup.py::
 
 
 
-There is a "hooks" config key where you can list the hooks
-that you want to run on all your ui/qrc scripts. E.g.::
+To actually use the hook, you must add a "hooks" key to your pyuic.json. This
+property lists the name of the hooks you'd like to run. E.g:
+
+
+.. code-block:: json
 
     {
         "files": [
@@ -134,7 +141,7 @@ that you want to run on all your ui/qrc scripts. E.g.::
     }
 
 At the moment, we provide one builtin hook: **gettext**. This hook let you
-use ``gettext.gettext`` instead of ``QCoreApplication.translate``.
+use a ``gettext.gettext`` wrapper instead of ``QCoreApplication.translate``.
 
 Command line tool
 -----------------
@@ -185,6 +192,11 @@ This project is licensed under the MIT license.
 
 Changelog
 ---------
+
+0.6.0
++++++
+
+- add support for running custom hooks
 
 0.5.2
 +++++
