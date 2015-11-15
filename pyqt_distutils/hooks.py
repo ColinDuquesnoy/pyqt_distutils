@@ -1,44 +1,8 @@
 """
-A pyqt-distutils hook is a python function that is called after the
-compilation of a ui script to let you customise its content. E.g. you
-might want to write a hook to change the translate function used or replace
-the PyQt imports by your owns if you're using a shim,...
-
-The hook function is a simple python function which must take a single
-argument: the path to the generated python script.
-
-Hooks are exposed as setuptools entrypoint using :attr:`ENTRYPOINT` as the
-entrypoint key. E.g., in your setup.py::
-
-    setup(
-        ...,
-        entry_points={
-            'pyqt_distutils_hooks': [
-                'hook_name = package_name.module_name:function_name']
-        },
-        ...)
-
-
-
-There is a "hooks" config key where you can list the hooks
-that you want to run on all your ui/qrc scripts. E.g.::
-
-    {
-        "files": [
-            ["forms/*.ui", "foo_gui/forms/"],
-            ["resources/*.qrc", "foo_gui/forms/"]
-        ],
-        "pyrcc": "pyrcc5",
-        "pyrcc_options": "",
-        "pyuic": "pyuic5",
-        "pyuic_options": "--from-imports",
-        "hooks": ["gettext", "spam", "eggs"]
-    }
-
-At the moment, we provide one builtin hook: **gettext**. This hook let you
-use ``gettext.gettext`` instead of ``QCoreApplication.translate``.
+This module contains the hooks load and our builtin hooks.
 
 """
+import re
 import pkg_resources
 import traceback
 
@@ -74,8 +38,7 @@ def hook(ui_file_path):
 
 
 GETTEXT_REPLACEMENT = '''        import gettext
-        def _translate(_, string):
-            return gettext.gettext(string)
+        _ = gettext.gettext
 '''
 
 
@@ -85,6 +48,9 @@ def gettext(ui_file_path):
     """
     with open(ui_file_path, 'r') as fin:
         content = fin.read()
+
+    content = re.sub(r'_translate\(".*",\s', '_(', content)
+
     with open(ui_file_path, 'w') as fout:
         fout.write(content.replace(
             '        _translate = QtCore.QCoreApplication.translate',

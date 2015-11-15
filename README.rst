@@ -193,6 +193,11 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.6.1
++++++
+
+- improbe gettext hook implementation to work with xgettext and babel
+
 0.6.0
 +++++
 
