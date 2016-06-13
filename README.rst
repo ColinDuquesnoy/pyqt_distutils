@@ -46,32 +46,25 @@ To forcibly rebuilt every files, use the ``--force`` option::
     python setup.py build_ui --force
 
 If you want to require the user to have ``pyqt-distutils`` installed, and
-always have the ``build_ui`` command run as part of the ``develop`` and
-``install`` commands, you can do so with two custom command classes:
+always have the ``build_ui`` command run as part of the ``build_py`` command
+(and all dependent commands), you can do so with a custom command class:
 
 .. code-block:: python
 
     from setuptools import setup
-    from setuptools.command.develop import develop
-    from setuptools.command.install import install
+    from setuptools.command.build_py import build_py
 
     from pyqt_distutils.build_ui import build_ui
 
-    class custom_develop(develop):
+    class custom_build_py(build_py):
         def run(self):
             self.run_command('build_ui')
-            develop.run(self)
-
-    class custom_install(install):
-        def run(self):
-            self.run_command('build_ui')
-            install.run(self)
+            build_py.run(self)
 
     setup(...,
         cmdclass={
             'build_ui': build_ui,
-            'develop': custom_develop,
-            'install': custom_install
+            'build_py': custom_build_py,
         }
     )
 
