@@ -216,6 +216,11 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.7.1
++++++
+
+Improve subprocess command handling: write failing commands in yellow and their error message in red.
+
 0.7.0
 +++++
 
