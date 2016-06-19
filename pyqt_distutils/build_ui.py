@@ -92,10 +92,10 @@ class build_ui(Command):
                     try:
                         subprocess.check_output(cmd.split(' '))
                     except subprocess.CalledProcessError as e:
-                        write_message(cmd, 'red')
+                        write_message(cmd, 'yellow')
                         write_message(e.output, 'red')
                     except OSError as e:
-                        write_message(cmd, 'red')
+                        write_message(cmd, 'yellow')
                         write_message(str(e), 'red')
                     else:
                         write_message(cmd, 'green')
