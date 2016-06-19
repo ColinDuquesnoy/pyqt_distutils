@@ -4,6 +4,7 @@ Contains the config class (pyuic.cfg or pyuic.json)
 """
 import json
 
+from .utils import write_message
 
 class QtApi:
     pyqt4 = 0
@@ -36,7 +37,7 @@ class Config:
             else:
                 break
         else:
-            print('failed to open configuration file')
+            write_message('failed to open configuration file', 'yellow')
         if not hasattr(self, 'hooks'):
             self.hooks = []
 
@@ -64,17 +65,17 @@ class Config:
             self.pyuic_options = '--from-import'
             self.files[:] = []
         self.save()
-        print('pyuic.json generated')
+        write_message('pyuic.json generated', 'green')
 
     def add(self, src, dst):
         self.load()
         for fn, _ in self.files:
             if fn == src:
-                print('ui file already added: %s' % src)
+                write_message('ui file already added: %s' % src)
                 return
         self.files.append((src, dst))
         self.save()
-        print('file added to pyuic.json: %s -> %s' % (src, dst))
+        write_message('file added to pyuic.json: %s -> %s' % (src, dst), 'green')
 
     def remove(self, filename):
         self.load()
@@ -87,4 +88,4 @@ class Config:
         if to_remove is not None:
             self.files.pop(to_remove)
         self.save()
-        print('file removed from pyuic.json: %s' % filename)
+        write_message('file removed from pyuic.json: %s' % filename, 'green')

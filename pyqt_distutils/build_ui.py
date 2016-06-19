@@ -8,6 +8,8 @@ from setuptools import Command
 
 from .config import Config
 from .hooks import load_hooks
+from .utils import write_message
+
 
 class build_ui(Command):
     """
@@ -27,7 +29,7 @@ class build_ui(Command):
             self.cfg = Config()
             self.cfg.load()
         except (IOError, OSError):
-            print('cannot open pyuic.json (or pyuic.cfg)')
+            write_message('cannot open pyuic.json (or pyuic.cfg)', 'red')
             self.cfg = None
 
     def is_outdated(self, src, dst, ui):
@@ -62,7 +64,7 @@ class build_ui(Command):
         for glob_exp, dest in self.cfg.files:
             for src in glob.glob(glob_exp):
                 if not os.path.exists(src):
-                    print('skipping target %s, file not found' % src)
+                    write_message('skipping target %s, file not found' % src, 'yellow')
                     continue
                 src = os.path.join(os.getcwd(), src)
                 dst = os.path.join(os.getcwd(), dest)
@@ -86,15 +88,15 @@ class build_ui(Command):
                     pass
 
                 if self.is_outdated(src, dst, ui):
-                    print(cmd)
+                    write_message(cmd, 'green')
                     os.system(cmd)
                     for hookname in self.cfg.hooks:
                         try:
                             hook = self._hooks[hookname]
                         except KeyError:
-                            print('warning, unknonw hook: %r' % hookname)
+                            write_message('warning, unknonw hook: %r' % hookname, 'yellow')
                         else:
-                            print('running hook %r' % hookname)
+                            write_message('running hook %r' % hookname, 'blue')
                             hook(dst)
                 else:
-                    print('skipping %s, up to date' % src)
+                    write_message('skipping %s, up to date' % src)
