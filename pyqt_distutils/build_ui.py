@@ -5,6 +5,7 @@ Distutils extension for PyQt/PySide applications
 import glob
 import os
 from setuptools import Command
+import subprocess
 
 from .config import Config
 from .hooks import load_hooks
@@ -88,8 +89,16 @@ class build_ui(Command):
                     pass
 
                 if self.is_outdated(src, dst, ui):
-                    write_message(cmd, 'green')
-                    os.system(cmd)
+                    try:
+                        subprocess.check_output(cmd.split(' '))
+                    except subprocess.CalledProcessError as e:
+                        write_message(cmd, 'red')
+                        write_message(e.output, 'red')
+                    except OSError as e:
+                        write_message(cmd, 'red')
+                        write_message(str(e), 'red')
+                    else:
+                        write_message(cmd, 'green')
                     for hookname in self.cfg.hooks:
                         try:
                             hook = self._hooks[hookname]
