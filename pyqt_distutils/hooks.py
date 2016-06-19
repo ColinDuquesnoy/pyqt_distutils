@@ -4,7 +4,8 @@ This module contains the hooks load and our builtin hooks.
 """
 import re
 import pkg_resources
-import traceback
+
+from .utils import write_message
 
 
 #: Name of the entrypoint to use in setup.py
@@ -23,8 +24,8 @@ def load_hooks():
         name = str(entrypoint).split('=')[0].strip()
         try:
             hook = entrypoint.load()
-        except Exception:
-            traceback.print_exc()
+        except Exception as e:
+            write_message('failed to load entry-point %r (error="%s")' % (name, e), 'yellow')
         else:
             hooks[name] = hook
     return hooks
@@ -35,7 +36,6 @@ def hook(ui_file_path):
     This is the prototype of a hook function.
     """
     pass
-
 
 
 def gettext(ui_file_path):

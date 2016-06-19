@@ -216,6 +216,18 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.7.0
++++++
+
+Add optional support for colorama.
+
+If colorama can be imported, the build_ui output will be colored as follow:
+
+- pyuic/pyrcc commands in GREEN
+- skipped targets with the DEFAULT FORE COLOR
+- warning message in YELLOW
+- error messages in RED
+
 0.6.2
 +++++
 
