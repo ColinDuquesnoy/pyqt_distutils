@@ -59,3 +59,9 @@ docs/_build/
 # Ui scripts
 main_window_ui.py
 *_rc.py
+
+# HackEdit project files
+.hackedit
+
+# Plasma junks
+.directory
