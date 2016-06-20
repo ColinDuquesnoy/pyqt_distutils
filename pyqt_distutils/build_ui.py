@@ -4,8 +4,10 @@ Distutils extension for PyQt/PySide applications
 """
 import glob
 import os
-from setuptools import Command
 import subprocess
+import sys
+
+from setuptools import Command
 
 from .config import Config
 from .hooks import load_hooks
@@ -90,10 +92,10 @@ class build_ui(Command):
 
                 if self.is_outdated(src, dst, ui):
                     try:
-                        subprocess.check_output(cmd.split(' '))
+                        subprocess.check_output([t for t in cmd.split(' ') if t])
                     except subprocess.CalledProcessError as e:
                         write_message(cmd, 'yellow')
-                        write_message(e.output, 'red')
+                        write_message(e.output.decode(sys.stdout.encoding), 'red')
                     except OSError as e:
                         write_message(cmd, 'yellow')
                         write_message(str(e), 'red')
