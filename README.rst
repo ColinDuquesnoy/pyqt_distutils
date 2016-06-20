@@ -216,6 +216,13 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.7.2
++++++
+
+Fix unhandled exception: TypeError when there is a CalledProcessError (see issue `7`_)
+
+.. _7: https://github.com/ColinDuquesnoy/pyqt_distutils/issues/7
+
 0.7.1
 +++++
 
