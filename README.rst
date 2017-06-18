@@ -216,6 +216,13 @@ This project is licensed under the MIT license.
 Changelog
 ---------
 
+0.7.3
++++++
+
+Handle path with spaces (thanks @amacd31 and @benoit-pierre see PR `9`_)
+
+.. _9: https://github.com/ColinDuquesnoy/pyqt_distutils/pull/9
+
 0.7.2
 +++++
 
