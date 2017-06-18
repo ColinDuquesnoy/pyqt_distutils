@@ -13,6 +13,7 @@ except ImportError:
     # Python 2
     from pipes import quote
 
+
 def build_args(cmd, src, dst):
     """
         Build arguments list for passing to subprocess.call_check
@@ -26,6 +27,7 @@ def build_args(cmd, src, dst):
     args = shlex.split(cmd)
 
     return [arg for arg in args if arg]
+
 
 def write_message(text, color=None):
     if has_colorama:
