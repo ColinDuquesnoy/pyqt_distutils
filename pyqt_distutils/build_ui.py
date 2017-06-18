@@ -11,7 +11,7 @@ from setuptools import Command
 
 from .config import Config
 from .hooks import load_hooks
-from .utils import write_message
+from .utils import build_args, write_message
 
 
 class build_ui(Command):
@@ -84,7 +84,6 @@ class build_ui(Command):
                 filename = os.path.split(src)[1]
                 filename = os.path.splitext(filename)[0]
                 dst = os.path.join(dst, filename + ext)
-                cmd = cmd % (src, dst)
                 try:
                     os.makedirs(os.path.split(dst)[0])
                 except OSError:
@@ -92,7 +91,9 @@ class build_ui(Command):
 
                 if self.is_outdated(src, dst, ui):
                     try:
-                        subprocess.check_call([t for t in cmd.split(' ') if t])
+                        cmd = build_args(cmd, src, dst)
+                        subprocess.check_call(cmd)
+                        cmd = ' '.join(cmd)
                     except subprocess.CalledProcessError as e:
                         if e.output:
                             write_message(cmd, 'yellow')
