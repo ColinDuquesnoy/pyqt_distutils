@@ -4,15 +4,6 @@ Distutils extension for PyQt/PySide applications
 """
 import glob
 import os
-import shlex
-
-try:
-    # Python 3
-    from shlex import quote
-except ImportError:
-    # Python 2
-    from pipes import quote
-
 import subprocess
 import sys
 
@@ -20,7 +11,7 @@ from setuptools import Command
 
 from .config import Config
 from .hooks import load_hooks
-from .utils import write_message
+from .utils import build_args, write_message
 
 
 class build_ui(Command):
@@ -93,7 +84,6 @@ class build_ui(Command):
                 filename = os.path.split(src)[1]
                 filename = os.path.splitext(filename)[0]
                 dst = os.path.join(dst, filename + ext)
-                cmd = cmd % (quote(src), quote(dst))
                 try:
                     os.makedirs(os.path.split(dst)[0])
                 except OSError:
@@ -101,8 +91,7 @@ class build_ui(Command):
 
                 if self.is_outdated(src, dst, ui):
                     try:
-                        args = shlex.split(cmd)
-                        subprocess.check_call([arg for arg in args if arg])
+                        subprocess.check_call(build_args(cmd, src, dst))
                     except subprocess.CalledProcessError as e:
                         if e.output:
                             write_message(cmd, 'yellow')
