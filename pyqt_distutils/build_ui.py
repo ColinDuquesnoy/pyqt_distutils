@@ -91,7 +91,9 @@ class build_ui(Command):
 
                 if self.is_outdated(src, dst, ui):
                     try:
-                        subprocess.check_call(build_args(cmd, src, dst))
+                        cmd = build_args(cmd, src, dst)
+                        subprocess.check_call(cmd)
+                        cmd = ' '.join(cmd)
                     except subprocess.CalledProcessError as e:
                         if e.output:
                             write_message(cmd, 'yellow')
