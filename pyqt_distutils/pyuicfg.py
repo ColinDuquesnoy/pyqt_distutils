@@ -17,6 +17,7 @@ Options:
     -r SOURCE_FILE                        Remove file from pyuic.json
     --pyqt5                               Generate a pyuic.json file for PyQt5 instead of PyQt4
     --pyside                              Generate a pyuic.json file for PySide instead of PyQt4
+    --pyside2                             Generate a pyuic.json file for PySide2 instead of PyQt4
 
 """
 import os
@@ -30,6 +31,8 @@ def qt_api_from_args(arguments):
         return QtApi.pyqt5
     elif arguments['--pyside']:
         return QtApi.pyside
+    elif arguments['--pyside2']:
+        return QtApi.pyside2
     return QtApi.pyqt4
 
 
