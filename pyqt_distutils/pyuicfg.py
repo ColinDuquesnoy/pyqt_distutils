@@ -2,8 +2,13 @@
 
 Usage:
     pyuicfg -g
+    pyuicfg -f -g
     pyuicfg -g --pyqt5
+    pyuicfg -f -g --pyqt5
     pyuicfg -g --pyside
+    pyuicfg -f -g --pyside
+    pyuicfg -g --pyside2
+    pyuicfg -f -g --pyside2
     pyuicfg -a SOURCE_FILE DESTINATION_PACKAGE
     pyuicfg -r SOURCE_FILE
     pyuicfg (-h | --help)
@@ -12,6 +17,7 @@ Usage:
 Options:
     -h, --help                            Show help
     --version                             Show version
+    -f                                    Ask no question
     -g                                    Generate pyuic.json
     -a SOURCE_FILE DESTINATION_PACKAGE    Add file to pyuic.json
     -r SOURCE_FILE                        Remove file from pyuic.json
@@ -38,6 +44,7 @@ def qt_api_from_args(arguments):
 
 def main():
     arguments = docopt(__doc__, version=__version__)
+    force = arguments['-f']
     generate = arguments['-g']
     file_to_add = arguments['-a']
     destination_package = arguments['DESTINATION_PACKAGE']
@@ -45,7 +52,7 @@ def main():
     api = qt_api_from_args(arguments)
     cfg = Config()
     if generate:
-        if os.path.exists('pyuic.json'):
+        if not force and os.path.exists('pyuic.json'):
             choice = input('pyuic.json already exists. Do you want to replace '
                            'it? (y/N) ').lower()
             if choice != 'y':
