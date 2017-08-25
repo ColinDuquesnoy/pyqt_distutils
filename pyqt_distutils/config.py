@@ -10,6 +10,7 @@ class QtApi:
     pyqt4 = 0
     pyqt5 = 1
     pyside = 2
+    pyside2 = 3
 
 
 class Config:
@@ -62,6 +63,12 @@ class Config:
             self.pyrcc = 'pyside-rcc'
             self.pyrcc_options = '-py3'
             self.pyuic = 'pyside-uic'
+            self.pyuic_options = '--from-import'
+            self.files[:] = []
+        elif api == QtApi.pyside:
+            self.pyrcc = 'pyside2-rcc'
+            self.pyrcc_options = '-py3'
+            self.pyuic = 'pyside2-uic'
             self.pyuic_options = '--from-import'
             self.files[:] = []
         self.save()
