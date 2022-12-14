@@ -9,6 +9,8 @@ Usage:
     pyuicfg -f -g --pyside
     pyuicfg -g --pyside2
     pyuicfg -f -g --pyside2
+    pyuicfg -g --pyside6
+    pyuicfg -f -g --pyside6
     pyuicfg -a SOURCE_FILE DESTINATION_PACKAGE
     pyuicfg -r SOURCE_FILE
     pyuicfg (-h | --help)
@@ -22,8 +24,10 @@ Options:
     -a SOURCE_FILE DESTINATION_PACKAGE    Add file to pyuic.json
     -r SOURCE_FILE                        Remove file from pyuic.json
     --pyqt5                               Generate a pyuic.json file for PyQt5 instead of PyQt4
+    --pyqt6                               Generate a pyuic.json file for PyQt6 instead of PyQt4
     --pyside                              Generate a pyuic.json file for PySide instead of PyQt4
     --pyside2                             Generate a pyuic.json file for PySide2 instead of PyQt4
+    --pyside6                             Generate a pyuic.json file for PySide6 instead of PyQt4
 
 """
 import os
@@ -35,10 +39,14 @@ from pyqt_distutils.config import Config, QtApi
 def qt_api_from_args(arguments):
     if arguments['--pyqt5']:
         return QtApi.pyqt5
+    if arguments['--pyqt6']:
+        return QtApi.pyqt6
     elif arguments['--pyside']:
         return QtApi.pyside
     elif arguments['--pyside2']:
         return QtApi.pyside2
+    elif arguments['--pyside6']:
+        return QtApi.pyside6
     return QtApi.pyqt4
 
 

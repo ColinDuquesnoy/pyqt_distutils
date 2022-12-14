@@ -14,7 +14,7 @@ A set of distutils extension to work with PyQt applications and UI files.
 The goal of this tiny library is to help you write PyQt application in a
 pythonic way, using setup.py to build the Qt designer Ui files.
 
-This works with PyQt4, PyQt5 and PySide (tested with python3 only).
+This works with PyQt4, PyQt5, PyQt6 and PySide, PySide2, PySide6 (tested with python3 only).
 
 
 Usage
@@ -180,8 +180,17 @@ to manage your ``pyuic.json`` file:
     # generate pyuic.json in the current directory, for use with PyQt5
     pyuicfg -g --pyqt5
 
+    # generate pyuic.json in the current directory, for use with PyQt6
+    pyuicfg -g --pyqt6
+
     # generate pyuic.json in the current directory, for use with PySide
     pyuicfg -g --pyside
+
+    # generate pyuic.json in the current directory, for use with PySide2
+    pyuicfg -g --pyside2
+
+    # generate pyuic.json in the current directory, for use with PySide6
+    pyuicfg -g --pyside6
 
     # add files
     pyuicfg -a forms/main_window.ui foo_package/forms
