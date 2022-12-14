@@ -4,13 +4,68 @@ Contains the config class (pyuic.cfg or pyuic.json)
 """
 import json
 
+from enum import IntEnum, unique
+from dataclasses import dataclass
+from typing import List, Tuple
+
 from .utils import write_message
 
-class QtApi:
+@unique
+class QtApi(IntEnum):
     pyqt4 = 0
     pyqt5 = 1
-    pyside = 2
-    pyside2 = 3
+    pyqt6 = 2
+    pyside = 3
+    pyside2 = 4
+    pyside6 = 5
+
+
+@dataclass
+class ApiConfig:
+    pyrcc: str
+    pyrcc_options: str
+    pyuic: str
+    pyuic_options: str
+
+
+apiConfigs = [
+    ApiConfig(
+        pyrcc = 'pyrcc4',
+        pyrcc_options = '-py3',
+        pyuic = 'pyuic4',
+        pyuic_options = '--from-import',
+    ),
+    ApiConfig(
+        pyrcc = 'pyrcc5',
+        pyrcc_options = '',
+        pyuic = 'pyuic5',
+        pyuic_options = '--from-import',
+    ),
+    ApiConfig(
+        pyrcc = 'pyrcc6',
+        pyrcc_options = '',
+        pyuic = 'pyuic6',
+        pyuic_options = '--from-import',
+    ),
+    ApiConfig(
+        pyrcc = 'pyside-rcc',
+        pyrcc_options = '-py3',
+        pyuic = 'pyside-uic',
+        pyuic_options = '--from-import',
+    ),
+    ApiConfig(
+        pyrcc = 'pyside2-rcc',
+        pyrcc_options = '-py3',
+        pyuic = 'pyside2-uic',
+        pyuic_options = '--from-import',
+    ),
+    ApiConfig(
+        pyrcc = 'pyside6-rcc',
+        pyrcc_options = '-py3',
+        pyuic = 'pyside6-uic',
+        pyuic_options = '--from-import',
+    ),
+]
 
 
 class Config:
@@ -47,30 +102,16 @@ class Config:
             json.dump(self.__dict__, f, indent=4, sort_keys=True)
 
     def generate(self, api):
-        if api == QtApi.pyqt4:
-            self.pyrcc = 'pyrcc4'
-            self.pyrcc_options = '-py3'
-            self.pyuic = 'pyuic4'
-            self.pyuic_options = '--from-import'
-            self.files[:] = []
-        elif api == QtApi.pyqt5:
-            self.pyrcc = 'pyrcc5'
-            self.pyrcc_options = ''
-            self.pyuic = 'pyuic5'
-            self.pyuic_options = '--from-import'
-            self.files[:] = []
-        elif api == QtApi.pyside:
-            self.pyrcc = 'pyside-rcc'
-            self.pyrcc_options = '-py3'
-            self.pyuic = 'pyside-uic'
-            self.pyuic_options = '--from-import'
-            self.files[:] = []
-        elif api == QtApi.pyside:
-            self.pyrcc = 'pyside2-rcc'
-            self.pyrcc_options = '-py3'
-            self.pyuic = 'pyside2-uic'
-            self.pyuic_options = '--from-import'
-            self.files[:] = []
+        try:
+            config = apiConfigs[api]
+        except IndexError:
+            write_message('failed to generate pyuic.json. api not supported', 'red')
+            return
+        self.pyrcc = config.pyrcc
+        self.pyrcc_options = config.pyrcc_options
+        self.pyuic = config.pyuic
+        self.pyuic_options = config.pyuic_options
+        self.files[:] = []
         self.save()
         write_message('pyuic.json generated', 'green')
 
